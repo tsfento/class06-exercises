@@ -75,13 +75,11 @@ class Person4 {
 const staticPer1 = new Person4();
 const staticPer2 = new Person4();
 
-console.log(staticPer1.greet());
-//console.log(staticPer2.info());
+// console.log(staticPer2.info());
+console.log(Person4.info());
 
-//console.log(Person4.info());
-
-// Calling it from inside the class results in 'undefined'.
-// Calling it from an instance gets the desired result.
+// Calling it from an instance gets an error 'info not a function'.
+// Calling it from the class gets the intended result.
 
 // Exercise 5
 class Person5 {
