@@ -134,6 +134,7 @@ console.log(privatePerson.getPrivate());
 // The second test checks whether the random number is different between instances.
 // Both are solvable by instantiating a random number with Math.random() and returning
 // this.#id from the the getID function.
+// https://github.com/tsfento/private-fields-in-classes
 
 // Exercise 7
 class Library {
@@ -146,9 +147,9 @@ class Library {
     }
 
     removeBook(book) {
-        let index = this.library.find();
+        const bookISBN = book.getISBN();
 
-        this.library.slice(this.library[index]);
+        this.library = this.library.filter(book => book.getISBN() !== bookISBN);
     }
 
     listBooks() {
@@ -165,15 +166,70 @@ class Book {
         this.year = year;
         this.#ISBN = isbn;
     }
+
+    getISBN() {
+        return this.#ISBN;
+    }
 }
 
 const lib1 = new Library();
 
 const systemCollapse = new Book('System Collapse', 'Martha Wells', 2023, 123456);
 const replay = new Book('Replay', 'Ken Grimwood', 1986, 654321);
+const accidentalTimeMacihne = new Book('The Accidental Time Machine', 'Joe Haldeman', 2007, 456123);
 
 lib1.addBook(systemCollapse);
 lib1.addBook(replay);
+lib1.addBook(accidentalTimeMacihne);
 console.log(lib1.listBooks());
 lib1.removeBook(replay);
 console.log(lib1.listBooks());
+lib1.removeBook(systemCollapse);
+console.log(lib1.listBooks());
+
+// Exercise 8
+class Student {
+    constructor(name, grade) {
+        this.name = name;
+        this.grade = [grade];
+    }
+
+    addGrade(grade) {
+        this.grade.push(grade);
+    }
+
+    computeAverage() {
+        let sum1 = 0;
+
+        for (let i = 0; i < this.grade.length; i++) {
+            sum1 += this.grade[i];
+        }
+
+        console.log('computeAverage: ' + this);
+
+        return sum1 / this.grade.length;
+    }
+
+    computeAverageArrow = () => {
+        let sum2 = 0;
+
+        for (let i = 0; i < this.grade.length; i++) {
+            sum2 += this.grade[i];
+        }
+
+        console.log('computeAverageArrow: ' + this);
+
+        return sum2 / this.grade.length;
+    }
+}
+
+const student1 = new Student('Tyler', 97);
+
+console.log(student1);
+student1.addGrade(98);
+console.log(student1);
+console.log(student1.computeAverage());
+console.log(student1.computeAverageArrow());
+
+student1.computeAverage();
+student1.computeAverageArrow();
