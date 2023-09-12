@@ -94,19 +94,19 @@ class Person5 {
         console.log(`Hello, ${this.name}. I heard you are ${this.age}.`);
     }
 
-    getAge() {
-        return this.age;
+    get age() {
+        return this._age;
     }
 
-    setAge(age) {
-        this.age = age;
+    set age(newAge) {
+        this._age = newAge;
     }
 
-    getPrivate() {
+    get private() {
         return this.#privateVar;
     }
 
-    setPrivate(variable) {
+    set private(variable) {
         this.#privateVar = variable;
     }
 }
@@ -115,15 +115,15 @@ const getPerson = new Person5('Jim', 25);
 const setPerson = new Person5('Pam', 25);
 const privatePerson = new Person5('Test', 42);
 
-console.log(getPerson.getAge());
-setPerson.setAge(27);
-console.log(setPerson.getAge());
-setPerson.setAge(-5);
-console.log(setPerson.getAge());
+console.log(getPerson.age);
+setPerson.setAge = 27;
+console.log(setPerson.age);
+setPerson.setAge = -5;
+console.log(setPerson.age);
 
-console.log(privatePerson.getPrivate());
-privatePerson.setPrivate(50);
-console.log(privatePerson.getPrivate());
+console.log(privatePerson.private);
+privatePerson.private = 50;
+console.log(privatePerson.private);
 
 // Negative ages work. Possible area for catching a mistake from user input.
 
@@ -203,7 +203,7 @@ class Student {
             sum1 += this.grade[i];
         }
 
-        console.log('computeAverage: ' + this);
+        console.log(this);
 
         return sum1 / this.grade.length;
     }
@@ -215,7 +215,7 @@ class Student {
             sum2 += this.grade[i];
         }
 
-        console.log('computeAverageArrow: ' + this);
+        console.log(this);
 
         return sum2 / this.grade.length;
     }
